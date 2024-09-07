@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin a wheel</title>
+    <link rel="stylesheet" href="spin.css">
+</head>
+<body>
+    <!-- <div class="triangle"></div> -->
+    <div class="spin-btn">
+        <div class="spin">
+        Spin</div></div>
+    <div class="container">
+       
+        <div class="wheel">
+<div class="child-elements" id="concept-1">Right to Equality 1</div>
+
+<div class="child-elements" id="concept-2">Right to Freedom 2</div>
+
+<div class="child-elements" id="concept-3">Right to Protection 3</div>
+
+<div class="child-elements" id="concept-4">Right to Education 4</div>
+
+<div class="child-elements" id="concept-5">Right to Justice 5</div>
+
+<div class="child-elements" id="concept-6">Right against Exploitation 6</div>
+
+<div class="child-elements" id="concept-7">Cultural and Educational Rights 7</div>
+
+<div class="child-elements" id="concept-8">Right to Constitutional Remedies 8</div>
+
+
+</div>
+
+    </div>
+  
+    <script >
+    document.addEventListener('DOMContentLoaded', () => {
+    const wheel = document.querySelector('.wheel');
+    const spinBtn = document.querySelector('.spin-btn');
+    const numSections = 8; // Number of sections on the wheel
+    let currentRotation = 200;
+    let finalRotation = 0;
+
+    spinBtn.addEventListener('click', () => {
+        // Generate a random rotation value between 360 and 720 degrees (1 to 2 full spins)
+        const spinValue = Math.floor(Math.random() * 360) + 360;
+        currentRotation += spinValue;
+
+        // Apply rotation with smooth transition
+        wheel.style.transition = 'transform 4s ease-out';
+        wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+        // Calculate the section index
+        setTimeout(() => {
+            finalRotation = currentRotation % 360; // Normalize rotation to within one full circle
+            const sectionAngle = 360 / numSections; // Angle of each section
+
+            // Determine the section index
+            let sectionIndex;
+            if (finalRotation >= 0 && finalRotation < sectionAngle) {
+                sectionIndex = 0;
+            } else if (finalRotation >= sectionAngle && finalRotation < 2 * sectionAngle) {
+                sectionIndex = 1;
+            } else if (finalRotation >= 2 * sectionAngle && finalRotation < 3 * sectionAngle) {
+                sectionIndex = 2;
+            } else if (finalRotation >= 3 * sectionAngle && finalRotation < 4 * sectionAngle) {
+                sectionIndex = 3;
+            } else if (finalRotation >= 4 * sectionAngle && finalRotation < 5 * sectionAngle) {
+                sectionIndex = 4;
+            } else if (finalRotation >= 5 * sectionAngle && finalRotation < 6 * sectionAngle) {
+                sectionIndex = 5;
+            } else if (finalRotation >= 6 * sectionAngle && finalRotation < 7 * sectionAngle) {
+                sectionIndex = 6;
+            } else {
+                sectionIndex = 7;
+            }
+
+            console.log(`Section Index: ${sectionIndex + 1}`); // Log the section index
+            
+            // Reset transition for future spins
+            wheel.style.transition = 'transform 4s ease-out';
+        }, 4000); // Timeout should match the duration of the transition
+    });
+});
+
+
+
+        </script>
+        
+</body>
+</html>
+
+
+<!-- const finalRotation = currentRotation % 360; // Normalize rotation to within one full circle
+            const sectionAngle = 360 / numSections; // Angle of each section
+            const sectionIndex = Math.floor((finalRotation + (sectionAngle / 2)) % 360 / sectionAngle) ;
+
+            console.log(`Section Index: ${sectionIndex}`); -->
+
+
